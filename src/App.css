@@ -1,0 +1,203 @@
+/* Global Styles */
+body {
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #3E2723; /* Dark chocolate */
+  font-family: 'Lora', serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main Content */
+#main-content {
+  background-color: #D7B899; /* Light beige */
+  padding: 20px;
+}
+
+/* Jumbotron */
+.container .jumbotron img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Tile Styles */
+.tile {
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #5D4037; /* Medium chocolate */
+  color: #F5F5DC; /* Light beige */
+  border: 2px solid #8B4513; /* Rich chocolate border */
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.tile span {
+  font-size: 1.5em;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Specific Tile Backgrounds */
+#chocolate-tile {
+  background-image: url('../src/Images/chocolate.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+#drinks-tile {
+  background-image: url('../src/Images/drinks.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+#gum-tile {
+  background-image: url('../src/Images/Bubble_Gum_II_6.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+#spreads-tile {
+  background-image: url('../src/Images/chocolate-spreds.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+#discounts-tile {
+  background-image: url('../src/Images/special-prices.webp');
+  background-size:contain;
+  background-position: center;
+}
+
+#map-tile {
+  background-color: #3E2723; /* Solid dark chocolate background */
+  color: #F5F5DC; /* Light beige */
+  display:contents;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #8B4513;
+  border-radius: 10px;
+  padding: 10px;
+  height: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* Ensure content aligns correctly */
+}
+
+#map-tile iframe {
+  border: none;
+  border-radius: 10px;
+}
+
+/* Header */
+#header-nav {
+  background-color: #3E2723; /* Dark chocolate */
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Header Navigation Styling */
+#header-nav .navbar {
+  color: #ffffff; /* Sets the text color to white */
+}
+
+#header-nav .navbar-nav .nav-link {
+  color: #ffffff !important; /* Important to override Bootstrap's default styling */
+}
+
+#header-nav .navbar-brand h1, #header-nav .navbar-brand .tagline {
+  color: #ffffff; /* Ensure all text within the navbar-brand is also white */
+}
+
+#header-nav .navbar-brand .tagline img {
+  filter: brightness(0) invert(1); /* Makes images within tagline white if they are not */
+}
+
+#header-nav .navbar-toggler {
+  border-color: #ffffff; /* Optional: change the border color of the button if visible */
+}
+
+#header-nav .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* This ensures that dropdown menu items are also white */
+#header-nav .dropdown-menu {
+  background-color: #5D4037; /* Adjust the dropdown background if needed */
+}
+
+#header-nav .dropdown-item {
+  color: #ffffff !important; /* Ensures dropdown items text is white */
+}
+
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand h1 {
+  color: #F5F5DC;
+  font-size: 1.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.navbar-brand .tagline {
+  font-size: 0.9em;
+  color: #F5F5DC;
+}
+
+/* Footer */
+.panel-footer {
+  background-color: #3E2723; /* Dark chocolate */
+  color: #F5F5DC;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Buttons */
+#call-btn > a {
+  font-size: 1.5em;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #f6b319; /* Warm golden */
+  color: #951c49; /* Deep maroon */
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+#call-btn > a:hover {
+  background-color: #e5a817; /* Slightly darker golden */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .tile {
+    height: 200px;
+    font-size: 1.2em;
+  }
+
+  #map-tile {
+    height: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .tile {
+    height: 180px;
+    font-size: 1em;
+  }
+}

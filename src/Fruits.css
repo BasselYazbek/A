@@ -1,0 +1,118 @@
+/* Global Section Styles */
+.fruits-section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #3E2723; /* Dark chocolate */
+  border-bottom: 2px solid #D7B899; /* Light beige */
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Items Container */
+.fruits-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Smaller min value for better grid alignment */
+  gap: 20px; /* Space between items */
+}
+
+/* Card Styles */
+.card {
+  background-color: #FDF5E6; /* Light beige */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden; /* Ensure text stays within bounds */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.card img {
+  aspect-ratio: 16/9; /* Standard aspect ratio for images */
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Card Content */
+.card-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+
+/* Sold-Out Label */
+.sold-out-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #FF6347; /* Tomato red */
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.9em;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+/* Loading Spinner */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #3E2723; /* Dark chocolate */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Grid Adjustments */
+@media (min-width: 768px) {
+  .fruits-container {
+    grid-template-columns: repeat(auto-fill, minmax(390px, 1fr)); /* Increased min width */
+    grid-gap: 20px; /* Provide sufficient gap between items */
+  }
+}
+
+
+ @media (min-width: 1000px) and (max-width: 1199px) {
+  .fruits-container {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Adjust to ensure two items per line */
+  }
+}
+
+@media (min-width: 1200px) {
+  .fruits-container {
+    grid-template-columns: repeat(auto-fill, minmax(540px, 1fr)); /* Larger screens */
+  }
+}
+@media (max-width: 767px) {
+  .fruits-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* More responsive on smaller devices */
+  }
+}

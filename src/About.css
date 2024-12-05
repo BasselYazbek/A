@@ -1,0 +1,22 @@
+/* About.css */
+
+/* Styles for the About component */
+.containerr {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .containerr h1 {
+    color: #4285f4;
+    text-align: center;
+  }
+  
+  .containerr p {
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+  }
+  
+  /* Add more styles as needed */
+  
