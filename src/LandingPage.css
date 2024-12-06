@@ -1,0 +1,138 @@
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    min-height: 100vh;
+    background-color: #F5F5F5;
+    padding: 20px;
+}
+
+.intro-text {
+    text-align: center;
+    max-width: 800px; /* Restricts the maximum width for better readability */
+    padding: 20px;
+    color: #5D4037; /* A deep chocolate brown for strong visibility */
+    font-size: 20px; /* Slightly larger font size for better readability */
+    font-family: 'Arial', sans-serif; /* Modern, readable font */
+    font-weight: 600; /* Medium weight for better emphasis */
+    line-height: 1.6; /* Improves spacing between lines */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+    background-color: rgba(255, 255, 255, 0.8); /* Light background to enhance text contrast */
+    border-radius: 8px; /* Rounded corners for aesthetic */
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.1); /* Soft shadow for depth */
+}
+
+.category h2 {
+    font-size: 24px; /* Larger font size for category titles */
+    font-weight: bold; /* Bold weight for emphasis */
+    color: #FFFFFF; /* White for high contrast on dark background */
+    text-transform: uppercase; /* Makes text uppercase for stylistic emphasis */
+    margin-bottom: 5px; /* Adds a little space below the title */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* More pronounced shadow for title text */
+}
+
+.category p {
+    font-size: 16px; /* Legible font size for descriptions */
+    color: #F5F5F5; /* Soft off-white for gentle contrast */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Subtle text shadow for depth */
+    margin-top: 10px; /* Space above description text */
+}
+
+.categories-container {
+    display: flex;
+    flex-direction: row; /* Ensures horizontal layout */
+    justify-content: space-around; /* Spreads categories evenly */
+    width: 100%; /* Full width to utilize space */
+    padding: 20px; /* Padding for aesthetic spacing */
+}
+
+.category {
+    flex-basis: 45%; /* Each category takes up less than half the container width */
+    margin: 0 10px; /* Space between categories */
+    padding: 20px;
+    background: linear-gradient(145deg, #5D4037, #3E2723);
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.category:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.category img {
+    width: 100%;
+    height: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.category:hover img {
+    opacity: 1;
+}
+
+.coming-soon-overlay {
+    font-size: 24px; /* Adequate size for visibility */
+    background-color: rgba(0,0,0,0.85); /* Darker background for standout 'Coming Soon' text */
+    padding: 8px 12px; /* Padding around text for better framing */
+    border-radius: 5px; /* Rounded corners */
+    text-align: center; /* Ensures text is centrally aligned */
+    animation: pulse 2s infinite; /* Adds a pulsing animation to attract attention */
+}
+
+.coming-soon {
+    background: linear-gradient(145deg, grey, #A9A9A9);
+    cursor: not-allowed;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.85; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 767px) {
+    .landing-container {
+        flex-direction: column; /* Keeps the column layout */
+        padding: 10px; /* Reduces padding for more screen space */
+        gap: 15px; /* Reduces gap between elements */
+    }
+
+    .intro-text {
+        font-size: 16px; /* Slightly smaller text for better fit */
+        padding: 10px; /* Smaller padding */
+        max-width: 100%; /* Allows text block to fill container */
+    }
+
+    .category {
+        width: 100%; /* Full width for easier tapping and better visibility */
+        padding: 15px; /* Optimizes padding */
+        margin: 0; /* Removes any margins */
+    }
+
+    .category img {
+        height: 150px; /* Reduces image height to save space */
+    }
+
+    .category h2 {
+        font-size: 18px; /* Reduces title font size for space efficiency */
+    }
+
+    .category p {
+        font-size: 14px; /* Smaller paragraph text for better fit */
+    }
+
+    .coming-soon-overlay {
+        font-size: 14px; /* Smaller font size for overlays */
+        padding: 6px 10px; /* Adjust padding to fit smaller text */
+    }
+}
+

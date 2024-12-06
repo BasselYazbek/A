@@ -1,44 +1,28 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Nav from '../src/Nav.js';
-import Main from './Main.js';
-import FruitsMenu from './FruitsMenu.js';
-import ChocolatesMenu from './CholatesMenu.js';
-import ChocolateSpredsMenu from './ChocolateSpredsMenu.js';
-import DiscountsMenu from './DiscountsMenu.js';
-import GumMenu from './GumMenu'; // New GumMenu component
-import Footer from './Footer.js';
-import About from './About.js';
-import { useState, useEffect } from 'react';
-import { onAuthStateChanged, signOut } from 'firebase/auth'; // Import signOut for logout
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import Nav from './Nav';
+import Main from './Main';
+import FruitsMenu from './FruitsMenu';
+import ChocolatesMenu from './CholatesMenu';
+import ChocolateSpredsMenu from './ChocolateSpredsMenu';
+import DiscountsMenu from './DiscountsMenu';
+import GumMenu from './GumMenu';
+import Footer from './Footer';
+import About from './About';
+import LandingPage from './LandingPage';
+import Login from './Login';
+import AdminPanel from './AdminPanel';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebase';
-import Login from './Login'; // Login component with email/password
-import AdminPanel from './AdminPanel'; // Admin Panel
-
-
-// Polyfill for TextEncoder and TextDecoder
-import { TextEncoder, TextDecoder } from 'text-encoding';
-if (typeof global.TextEncoder === 'undefined') {
-  global.TextEncoder = TextEncoder;
-  global.TextDecoder = TextDecoder;
-}
-
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Monitor authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // Simple check for admin (you can customize this by checking user roles)
-        if (user.email === 'admin@example.com') { // Replace with your actual admin email
-          setIsAdmin(true);
-        }
-      } else {
-        setIsAdmin(false);
-      }
+      setIsAdmin(user && user.email === 'admin@example.com');
       setLoading(false);
     });
 
@@ -47,7 +31,7 @@ function App() {
 
   const handleLogout = () => {
     signOut(auth);
-    setIsAdmin(false); // Reset admin state after logout
+    setIsAdmin(false);
   };
 
   if (loading) {
@@ -55,27 +39,31 @@ function App() {
   }
 
   return (
+    <Router>
+      <RoutesWrapper isAdmin={isAdmin} setIsAdmin={setIsAdmin} onLogout={handleLogout} />
+      <Footer />
+    </Router>
+  );
+}
+
+function RoutesWrapper({ isAdmin, setIsAdmin, onLogout }) {
+  const location = useLocation(); // Properly placed within Router context
+  const showNav = location.pathname !== '/'; // Don't show Nav on the landing page
+
+  return (
     <>
-      <Router>
-        <div>
-          <Nav isAdmin={isAdmin} onLogout={handleLogout} />
-          <Routes>
-            {isAdmin ? (
-              <Route path='/admin' element={<AdminPanel />} />
-            ) : (
-              <Route path='/admin' element={<Login onLoginSuccess={() => setIsAdmin(true)} />} />
-            )}
-            <Route path='/chocolate' element={<FruitsMenu isAdmin={isAdmin} />} />
-            <Route path='/drinks' element={<ChocolatesMenu isAdmin={isAdmin} />} />
-            <Route path='/chocolateSpreds' element={<ChocolateSpredsMenu isAdmin={isAdmin} />} />
-            <Route path='/discounts' element={<DiscountsMenu isAdmin={isAdmin} />} />
-            <Route path='/gum' element={<GumMenu isAdmin={isAdmin} />} /> {/* New Gum route */}
-            <Route path='/' exact element={<Main />} />
-            <Route path='/about' exact element={<About />} />
-          </Routes>
-          <Footer />
-        </div>
-      </Router>
+      {showNav && <Nav isAdmin={isAdmin} onLogout={onLogout} />}
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/main' element={<Main />} />
+        <Route path='/admin' element={isAdmin ? <AdminPanel /> : <Login onLoginSuccess={() => setIsAdmin(true)} />} />
+        <Route path='/chocolate' element={<FruitsMenu isAdmin={isAdmin} />} />
+        <Route path='/drinks' element={<ChocolatesMenu isAdmin={isAdmin} />} />
+        <Route path='/chocolateSpreds' element={<ChocolateSpredsMenu isAdmin={isAdmin} />} />
+        <Route path='/discounts' element={<DiscountsMenu isAdmin={isAdmin} />} />
+        <Route path='/gum' element={<GumMenu isAdmin={isAdmin} />} />
+        <Route path='/about' element={<About />} />
+      </Routes>
     </>
   );
 }

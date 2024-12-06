@@ -72,7 +72,7 @@ const DiscountsMenu = ({ isAdmin }) => {
         onChange={handleSearchChange}
       />
 
-      <div className="sort-container custom-dropdown">
+      {/* <div className="sort-container custom-dropdown">
         <select
           className="sort-dropdown custom-select"
           value={selectedCategory}
@@ -84,7 +84,7 @@ const DiscountsMenu = ({ isAdmin }) => {
           <option value="Gum">Gum</option>
           <option value="Chocolate Spreads">Chocolate Spreads</option>
         </select>
-      </div>
+      </div> */}
 
       <div className="fruits-container">
         {filteredItems.map((item) => (
