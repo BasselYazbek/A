@@ -6,6 +6,7 @@ import './Fruits.css'; // Importing shared CSS for consistent styling across com
 
 const ChocolateSpredsMenu = ({ isAdmin }) => {
   const [chocolateSpredsItems, setChocolateSpredsItems] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,13 +41,13 @@ const ChocolateSpredsMenu = ({ isAdmin }) => {
     }
   };
 
-  const handleEditItem = async (updatedItem) => {
+  const handleEditItem = async (item) => {
     try {
       const chocolateSpredsCollection = firestore.collection('chocolatespreds');
-      await chocolateSpredsCollection.doc(updatedItem.id).update(updatedItem);
+      await chocolateSpredsCollection.doc(item.id).update(item);
 
       setChocolateSpredsItems(prevItems =>
-        prevItems.map(item => (item.id === updatedItem.id ? updatedItem : item))
+        prevItems.map(existingItem => (existingItem.id === item.id ? item : existingItem))
       );
     } catch (error) {
       console.error('Error updating item in Firestore:', error);
@@ -54,9 +55,7 @@ const ChocolateSpredsMenu = ({ isAdmin }) => {
   };
 
   const handleDeleteItem = async (itemId) => {
-    const shouldDelete = window.confirm(`Are you sure you want to delete this item?`);
-
-    if (shouldDelete) {
+    if (window.confirm(`Are you sure you want to delete this item?`)) {
       try {
         const chocolateSpredsCollection = firestore.collection('chocolatespreds');
         await chocolateSpredsCollection.doc(itemId).update({ hidden: true });
@@ -87,6 +86,14 @@ const ChocolateSpredsMenu = ({ isAdmin }) => {
     }
   };
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredItems = chocolateSpredsItems.filter(item =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -99,12 +106,19 @@ const ChocolateSpredsMenu = ({ isAdmin }) => {
   return (
     <div className="container">
       <h2 className="section-title">Chocolate Spreads Menu</h2>
+      <input
+        type="text"
+        className="search-box"
+        placeholder="Search Chocolate Spreads..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
       <div className="fruits-container">
-        {chocolateSpredsItems.map((item) => (
+        {filteredItems.map((item) => (
           <ChocolateSpreds
             key={item.id}
             {...item}
-            onEdit={() => handleEditItem(item)} // Ensuring functions are defined inline
+            onEdit={() => handleEditItem(item)}
             onDelete={() => handleDeleteItem(item.id)}
             isAdmin={isAdmin}
             onToggleStock={() => toggleStock(item.id)}

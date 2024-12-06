@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Gum from './Gum';
 import AddItemForm from './AddItemForm';
 import { firestore } from './firebase';
-import './Fruits.css'; // Ensure this CSS applies correctly
+import './Fruits.css'; // Using the same CSS for consistent styling
 
 const GumMenu = ({ isAdmin }) => {
   const [gumItems, setGumItems] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,6 +41,14 @@ const GumMenu = ({ isAdmin }) => {
     }
   };
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredGumItems = gumItems.filter(item =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -52,12 +61,18 @@ const GumMenu = ({ isAdmin }) => {
   return (
     <div className="container">
       <h2 className="section-title">Gum Menu</h2>
+      <input
+        type="text"
+        className="search-box"
+        placeholder="Search Gums..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
       <div className="fruits-container">
-        {gumItems.map((item) => (
+        {filteredGumItems.map((item) => (
           <Gum key={item.id} {...item} />
         ))}
       </div>
-
       {isAdmin && (
         <div className="add-item-container">
           <AddItemForm onAddItem={handleAddItem} collectionName="gum" />

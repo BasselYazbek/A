@@ -86,6 +86,75 @@
   animation: spin 2s linear infinite;
 }
 
+/* Search Box Styles */
+.search-box {
+  width: 100%; /* Full width to fit container */
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border: 2px solid #D7B899; /* Light beige, matches the section titles */
+  border-radius: 10px; /* Rounded borders */
+  outline: none;
+  font-size: 1em;
+  color: #3E2723; /* Dark chocolate color for text */
+  background-color: #FDF5E6; /* Light beige background for input */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inner shadow for depth */
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-box:focus {
+  border-color: #3E2723; /* Dark chocolate color when focused */
+  box-shadow: 0 0 8px rgba(62, 39, 35, 0.3); /* Soft outer glow effect on focus */
+}
+
+/* Custom Dropdown Container */
+.custom-dropdown {
+  position: relative;
+  width: 200px; /* Set width of the dropdown */
+  margin: 20px 0;
+}
+
+/* Custom Select Styles */
+.custom-select {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  appearance: none; /* Remove default system dropdown arrow */
+  background-color: #f8f8f8;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Dropdown Arrow Styling */
+.custom-dropdown::after {
+  content: '▼'; /* Unicode for down arrow, you can use an SVG icon as well */
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Prevent the arrow from being clickable */
+  color: #888;
+}
+
+/* Hover effects for dropdown */
+.custom-select:hover {
+  background-color: #e9e9e9;
+}
+
+/* Focus styles for accessibility */
+.custom-select:focus {
+  border-color: #5c67f2;
+  outline: none; /* Optionally remove focus outline */
+  box-shadow: 0 0 5px rgba(44, 40, 203, 0.5);
+}
+
+/* Style adjustments for options */
+.custom-select option {
+  padding: 10px;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -114,5 +183,10 @@
 @media (max-width: 767px) {
   .fruits-container {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* More responsive on smaller devices */
+  }
+
+  .search-box {
+    width: 100%; /* Ensure full width on smaller devices */
+    margin-bottom: 10px; /* Smaller margin on mobile */
   }
 }

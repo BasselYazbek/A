@@ -7,6 +7,7 @@ import './Fruits.css'; // Ensure this is the correct path to the CSS file that c
 const DiscountsMenu = ({ isAdmin }) => {
   const [discountItems, setDiscountItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -41,9 +42,14 @@ const DiscountsMenu = ({ isAdmin }) => {
     }
   };
 
-  const filteredItems = selectedCategory === 'All'
-    ? discountItems
-    : discountItems.filter(item => item.category === selectedCategory);
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredItems = discountItems.filter(item =>
+    (item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.description.toLowerCase().includes(searchTerm.toLowerCase())) &&
+    (selectedCategory === 'All' || item.category === selectedCategory)
+  );
 
   if (loading) {
     return (
@@ -58,9 +64,17 @@ const DiscountsMenu = ({ isAdmin }) => {
     <div className="container">
       <h2 className="section-title">Discounted Items</h2>
 
-      <div className="sort-container">
+      <input
+        type="text"
+        className="search-box"
+        placeholder="Search items..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
+
+      <div className="sort-container custom-dropdown">
         <select
-          className="sort-dropdown"
+          className="sort-dropdown custom-select"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
